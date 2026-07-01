@@ -1,0 +1,29 @@
+{
+  "name": "viewport",
+  "version": "1.0.0",
+  "description": "Viewport is a backend API for a modern video-sharing platform featuring user authentication, video uploads, playlists, comments, likes, subscriptions, and community posts. Built with Express.js, MongoDB, JWT, and Cloudinary.",
+  "keywords": [
+    "express",
+    "mongodb",
+    "jwt",
+    "cloudinary"
+  ],
+  "license": "ISC",
+  "author": "byteVoid",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "test": "node src/index.js",
+    "devel": "nodemon src/index.js"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "morgan": "^1.11.0",
+    "winston": "^3.19.0"
+  }
+}
