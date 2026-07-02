@@ -1,10 +1,14 @@
 import express from "express";
+import helmet from "helmet";
+import compression from "compression";
 import cors from "cors";
 import cookieParser from "cookie-parser";
 import logger from "./utils/logger.js";
 import morgan from "morgan";
 
 const app = express();
+app.use(helmet());
+app.use(compression());
 
 app.use(express.json({ limit: "16kb" }));
 app.use(express.urlencoded({ extended: true, limit: "16kb" }));
@@ -24,7 +28,6 @@ app.use(
 
 // logger
 const morganFormat = ":method :url :status :response-time ms";
-
 app.use(
   morgan(morganFormat, {
     stream: {
