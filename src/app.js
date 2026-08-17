@@ -2,7 +2,6 @@ import express from "express";
 import helmet from "helmet";
 import compression from "compression";
 import cors from "cors";
-import cookieParser from "cookie-parser";
 import logger from "./utils/logger.js";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
@@ -51,6 +50,9 @@ app.use(
 
 // import all the routes here
 import healthChekerRouter from "./routes/healthcheck.routes.js";
+import userRouter from "./routes/user.routes.js";
+
 app.use("/api/v1/healthcheck", healthChekerRouter);
+app.use("/api/v1/users", userRouter);
 
 export default app;
