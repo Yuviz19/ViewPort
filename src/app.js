@@ -5,6 +5,7 @@ import cors from "cors";
 import logger from "./utils/logger.js";
 import morgan from "morgan";
 import cookieParser from "cookie-parser";
+import { errorHandler } from "./middlewares/error.middleware.js";
 
 const app = express();
 app.use(helmet());
@@ -55,4 +56,5 @@ import userRouter from "./routes/user.routes.js";
 app.use("/api/v1/healthcheck", healthChekerRouter);
 app.use("/api/v1/users", userRouter);
 
+app.use(errorHandler);
 export default app;
