@@ -20,10 +20,11 @@ const registerUser = asyncHandler(async (req, res) => {
   });
 
   if (ifExists) {
-    throw new ApiError(400, "User with email already exists");
+    throw new ApiError(400, "User with email or username already exists");
   }
 
-  const avatarLocalPath = req.files?.avator[0]?.path;
+  const avatarLocalPath = req.files?.avatar?.[0]?.path;
+  const coverLocalPath = req.files?.coverImage?.[0]?.path;
 
   if (!avatarLocalPath) {
     throw new ApiError(400, "Avatar is required");
@@ -31,8 +32,12 @@ const registerUser = asyncHandler(async (req, res) => {
 
   const avatar = await uploadOnCloud(avatarLocalPath);
 
-  const coverLocalPath = req?.files?.coverImage[0].path;
-  let coverImage = "";
+  // Check if Cloudinary upload actually succeeded
+  if (!avatar) {
+    throw new ApiError(500, "Avatar upload to cloud failed");
+  }
+
+  let coverImage = null;
   if (coverLocalPath) {
     coverImage = await uploadOnCloud(coverLocalPath);
   }
@@ -43,7 +48,7 @@ const registerUser = asyncHandler(async (req, res) => {
     coverImage: coverImage?.url || "",
     email,
     password,
-    username: username.toLowercase(),
+    username: username.toLowerCase(),
   });
 
   const createdUser = await User.findById(user._id).select(
