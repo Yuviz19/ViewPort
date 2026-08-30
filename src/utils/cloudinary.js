@@ -1,6 +1,7 @@
 import { v2 as cloudinary } from "cloudinary";
 import fs from "fs";
 import dotenv from "dotenv";
+import { ApiError } from "./api_error.js";
 
 dotenv.config();
 
@@ -29,4 +30,12 @@ const uploadOnCloud = async (localFilePath) => {
   }
 };
 
-export { uploadOnCloud };
+const deleteFromCloudinary = async (publicId) => {
+  try {
+    await cloudinary.uploader.destroy(publicId);
+  } catch (err) {
+    throw new ApiError(500, "Error while deleting assets on Cloudinary", err);
+  }
+};
+
+export { uploadOnCloud, deleteFromCloudinary };
