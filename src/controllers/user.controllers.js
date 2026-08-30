@@ -4,6 +4,7 @@ import { ApiResponse } from "../utils/api_response.js";
 import { User } from "../models/users.models.js";
 import jwt from "jsonwebtoken";
 import { uploadOnCloud, deleteFromCloudinary } from "../utils/cloudinary.js";
+import { http } from "winston";
 
 const generateAccessRefreshTokens = async (userId) => {
   try {
@@ -174,7 +175,7 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 
     const options = {
       httpOnly: true,
-      secure: process.env.NODE_ENV,
+      secure: process.env.NODE_ENV === "production",
     }
 
     const { refreshToken: newRefreshToken, accessToken } = await generateAccessRefreshTokens(user._id);
@@ -197,7 +198,30 @@ const refreshAccessToken = asyncHandler(async (req, res) => {
 });
 
 const logoutUser = asyncHandler(async (req, res) => {
+  await User.findByIdAndUpdate(
+    req.user._id,
+    {
+      $set: {
+        refreshToken: undefined
+      }
+    },
+    {new: true}
+  )
 
+  const options = {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production";
+  }
+
+  return res
+    .status(200)
+    .clearCookie("accessToken", options)
+    .clearCookie("refreshToken", options)
+    .json(new ApiResponse(
+      200,
+      {},
+      "User Logged Out successfully",
+    ))
 })
 
-export { registerUser, userLogin, refreshAccessToken };
+export { registerUser, userLogin, refreshAccessToken, logoutUser };
