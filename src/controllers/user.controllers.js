@@ -4,7 +4,6 @@ import { ApiResponse } from "../utils/api_response.js";
 import { User } from "../models/users.models.js";
 import jwt from "jsonwebtoken";
 import { uploadOnCloud, deleteFromCloudinary } from "../utils/cloudinary.js";
-import { http } from "winston";
 
 const generateAccessRefreshTokens = async (userId) => {
   try {
@@ -210,7 +209,7 @@ const logoutUser = asyncHandler(async (req, res) => {
 
   const options = {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production";
+    secure: process.env.NODE_ENV === "production",
   }
 
   return res
