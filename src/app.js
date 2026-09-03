@@ -52,9 +52,11 @@ app.use(
 // import all the routes here
 import healthChekerRouter from "./routes/healthcheck.routes.js";
 import userRouter from "./routes/user.routes.js";
+import videoRouter from "../routes/video.routes.js";
 
 app.use("/api/v1/healthcheck", healthChekerRouter);
 app.use("/api/v1/users", userRouter);
+app.use("api/v1/videos", videoRouter);
 
 app.use(errorHandler);
 export default app;
