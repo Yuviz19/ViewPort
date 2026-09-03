@@ -78,7 +78,7 @@ const getSubscribedChannels = asyncHandler(async (req, res) => {
   }
 
   const subs = await Subscription.find({
-    subscriber: new mongoose.Types.ObjectId(subscriberId);
+    subscriber: new mongoose.Types.ObjectId(subscriberId),
   }).populate('channel', "username avatar");
 
   if (!subs.length) {
