@@ -54,11 +54,13 @@ import healthChekerRouter from "./routes/healthcheck.routes.js";
 import userRouter from "./routes/user.routes.js";
 import videoRouter from "./routes/video.routes.js";
 import subscriptionRouter from "./routes/subscription.routes.js";
+import playlistRouter from "./routes/playlist.routes.js";
 
 app.use("/api/v1/healthcheck", healthChekerRouter);
 app.use("/api/v1/users", userRouter);
 app.use("api/v1/videos", videoRouter);
 app.use("/api/v1/subscriber", subscriptionRouter);
+app.use("api/v1/playlist", playlistRouter);
 
 app.use(errorHandler);
 export default app;
