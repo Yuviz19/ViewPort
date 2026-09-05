@@ -6,7 +6,7 @@ likeSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Comment",
     },
-    tweet: {
+    drop: {
       type: Schema.Types.ObjectId,
       ref: "Tweet",
     },
