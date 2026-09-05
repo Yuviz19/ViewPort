@@ -12,6 +12,6 @@ router.use(verifyJWT);
 
 router.route("/like-comment/:commentId").post(toggleCommentLike);
 router.route("/like-drop/:dropId").post(toggleDropLike);
-router.route("/like-video/:videoId").post(toggleVideoLike):
+router.route("/like-video/:videoId").post(toggleVideoLike);
 
 export default router;
