@@ -56,6 +56,7 @@ import videoRouter from "./routes/video.routes.js";
 import subscriptionRouter from "./routes/subscription.routes.js";
 import playlistRouter from "./routes/playlist.routes.js";
 import likeRouter from "./routes/like.routes.js";
+import dropRouter from "./routes/drop.routes.js";
 
 app.use("/api/v1/healthcheck", healthChekerRouter);
 app.use("/api/v1/users", userRouter);
@@ -63,6 +64,7 @@ app.use("api/v1/videos", videoRouter);
 app.use("/api/v1/subscriber", subscriptionRouter);
 app.use("api/v1/playlist", playlistRouter);
 app.use("/api/v1/like", likeRouter);
+app.use("api/v1/drop", dropRouter);
 
 app.use(errorHandler);
 export default app;
