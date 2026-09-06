@@ -7,7 +7,7 @@ commentSchema = new Schema(
       type: String,
       required: true,
     },
-    vidio: {
+    video: {
       type: Schema.Types.ObjectId,
       ref: "Video",
     },
